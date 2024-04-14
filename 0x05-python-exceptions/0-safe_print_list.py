@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 def safe_print_list(my_list=[], x=0):
     """Print elements of a list up to a specified number.
 
@@ -12,6 +11,9 @@ def safe_print_list(my_list=[], x=0):
 
     Returns:
         int: The real number of elements printed.
+
+    Raises:
+        None
 
     Example:
         >>> safe_print_list([1, 2, 3, 4, 5], 3)
@@ -27,10 +29,11 @@ def safe_print_list(my_list=[], x=0):
     """
     try:
         printed_count = 0
-        for i in range (x):
-            print(my_list[i], end= ' ')
+        for i in range(x):
+            print(my_list[i], end=' ')
             printed_count += 1
-        print() #to print a newline
-        return
+        print()
+        return printed_count
     except IndexError:
-        return printed_count1
+        return printed_count
+
