@@ -30,11 +30,8 @@ def safe_print_list(my_list=[], x=0):
         - If my_list is empty or x is 0, nothing will be printed.
     """
     try:
-        printed_count = 0
-        for i in range(x):
-            print(my_list[i], end='')
-            printed_count += 1
-        print()  # Add a newline after printing elements
+        while 
+
         return printed_count
     except IndexError:
         return printed_count
