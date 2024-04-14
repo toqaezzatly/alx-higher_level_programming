@@ -10,7 +10,10 @@ def safe_print_integer(value):
               False otherwise.
     """
     try:
-        print("{:d}".format(value))
-        return True
+        if value is None:
+            return False
+        if isinstance(value, int):
+            print("{:d}".format(value))
+            return True
     except ValueError:
         return False
