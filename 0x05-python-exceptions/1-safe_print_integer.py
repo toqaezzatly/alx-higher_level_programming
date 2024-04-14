@@ -6,7 +6,7 @@ def safe_print_integer(value):
         value: The value to print.
 
     Returns:
-        bool: True if value has been correctly printed 
+        bool: True if value has been correctly printed
         (it means the value is an integer),
               False otherwise.
     """
