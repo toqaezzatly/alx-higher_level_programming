@@ -21,4 +21,6 @@ def safe_print_list_integers(my_list=[], x=0):
         print()  # Add a newline after printing elements
         return printed_count
     except IndexError:
-        return printed_count
+        pass
+    print()
+    return printed_count
