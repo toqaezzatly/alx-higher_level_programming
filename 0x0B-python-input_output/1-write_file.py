@@ -1,15 +1,10 @@
 #!/usr/bin/python3
+"""
+Contains the function "wrtie_file"
+"""
+
+
 def write_file(filename="", text=""):
-    '''
-    writes a string to a file (UTF8)
-    and retuens the number of characters written.
-    if the file exists, it overwrites the content;
-    otherwis it creats a new file.
-    '''
-    try:
-        with open(filename, "w", encoding="utf-8") as file:
-            num_char_written = file.write(text)
-            return num_char_written
-    except Exception as e:
-        print(f"An error occured: {e}")
-        return 0
+    """returns the number of chars written to "filename" from "text" """
+    with open(filename, 'w', encoding='utf=8') as f:
+        return f.write(text)
