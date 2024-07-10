@@ -1,17 +1,18 @@
-import os
+#!/usr/bin/python3
+"""
+This module takes in a repository name and an owner name, uses the GitHub API
+to list the 10 most recent commits, and prints each commit's SHA and author name.
+"""
+
+import requests
+import sys
 
 if __name__ == "__main__":
     repo = sys.argv[1]
     owner = sys.argv[2]
     
-    token = os.getenv('GITHUB_TOKEN')
-    headers = {}
-    
-    if token:
-        headers['Authorization'] = f'token {token}'
-    
     url = f"https://api.github.com/repos/{owner}/{repo}/commits"
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     
     commits = response.json()
     
