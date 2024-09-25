@@ -1,35 +1,26 @@
 #!/usr/bin/node
 
 const request = require('request');
+const url = process.argv[2];
 
-// Retrieve the API URL from command-line arguments
-const apiUrl = process.argv[2];
-
-// Make a GET request to the API URL
-request(apiUrl, (error, response, body) => {
-  if (error) {
-    console.error('Error:', error);
-    return;
-  }
-
-  if (response.statusCode === 200) {
-    // Parse the JSON response body
-    const todos = JSON.parse(body);
-    const completedTasks = {};
-
-    // Iterate over each task to count completed tasks by user ID
-    todos.forEach(todo => {
-      if (todo.completed) {
-        if (!completedTasks[todo.userId]) {
-          completedTasks[todo.userId] = 0;
+request(url, function (err, response, body) {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const completed = {};
+    const tasks = JSON.parse(body);
+    for (const i in tasks) {
+      const task = tasks[i];
+      if (task.completed === true) {
+        if (completed[task.userId] === undefined) {
+          completed[task.userId] = 1;
+        } else {
+          completed[task.userId]++;
         }
-        completedTasks[todo.userId]++;
       }
-    });
-
-    // Print the result
-    console.log(completedTasks);
+    }
+    console.log(completed);
   } else {
-    console.error('Error: Unable to retrieve data. Status code:', response.statusCode);
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });

@@ -1,33 +1,21 @@
 #!/usr/bin/node
 
-const request = require('request');
-
-// Retrieve the API URL from command-line arguments
-const apiUrl = process.argv[2];
-
-// Make a GET request to the API URL
-request(apiUrl, (error, response, body) => {
+const req = require('request');
+const id = process.argv[2];
+const url = 'https://swapi-api.hbtn.io/api/films/';
+req.get(url + id, function (error, res, body) {
   if (error) {
-    console.error('Error:', error);
-    return;
+    console.log(error);
   }
-
-  if (response.statusCode === 200) {
-    // Parse the JSON response body
-    const data = JSON.parse(body);
-    const films = data.results;
-    let count = 0;
-
-    // Iterate over each film to check for the presence of Wedge Antilles (character ID 18)
-    for (const film of films) {
-      if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
-        count++;
+  const data = JSON.parse(body);
+  const dd = data.characters;
+  for (const i of dd) {
+    req.get(i, function (error, res, body1) {
+      if (error) {
+        console.log(error);
       }
-    }
-
-    // Print the count of movies where Wedge Antilles is present
-    console.log(count);
-  } else {
-    console.log('Error: Unable to retrieve data');
+      const data1 = JSON.parse(body1);
+      console.log(data1.name);
+    });
   }
 });
